@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/usuario.css">
+    <script src="https://kit.fontawesome.com/563102be75.js" crossorigin="anonymous"></script>
+    <script src="js/funcoes.js"></script>
+    <link rel="icon" href="assets/icon/iconsite.png">
+</head>
+<body onload="validarSessao()">
+    <div class="header">
+        <div class="containner">
+            <div class="navbar">
+                <div class="logo">
+                    <img src="assets/imgs/logosite.png" alt="" class="imgLogo">
+                </div>
+                <div class="linha">
+                    <ul>
+                        <li><a href="">HOME</a></li>
+                        <li><a href="sobre.html">SOBRE MIM</a></li>
+                        <li><a href="">HISTÓRIA</a></li>
+                        <li>|</li>
+                        <li id="iconmenuperfil"onclick="clickPerfil()"><i class="fa-solid fa-user user" style="color: #ffffff;"></i></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="menuflutuante" id="subsub">
+        <span class="blocomenuflu"></span>
+        <span class="conta">CONTA</span>
+        <span class="imagemperfil"></span>
+        <span class="nomeconta" id="nome_do_usuario">Nome User</span>
+        <span class="contaemail" id="email_do_usuario">nomeuser@sptech.school</span>
+        <span class="cadastrarusuario mexer" onclick="cadastrar()">Acompanhar Jogos</span>
+        <span class="gerenciarconta mexer"onclick="gerenciarconta()">Times Favoritos</span>
+        <span class="contadashboard mexer" onclick="dashboard()">Quiz</span>
+        <span class="contalinha"></span>
+        <span class="contalogout mexer" onclick="limparSessao()">Fazer Logout</span>
+    </div>
+
+
+
+
+    <!-- -- conteudo --  -->
+
+
+</body>
+</html>
+
+<script src="js/funcoes.js"></script>
+<script>
+    function clickPerfil() {
+    if (subsub.style.display == 'flex') {
+        subsub.style.display = 'none'
+    } else {
+        subsub.style.display = 'flex'
+    }
+}
+</script>
