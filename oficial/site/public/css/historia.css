@@ -77,7 +77,7 @@ ul, li, a{
     font-weight: 750;
 }
 
-li:hover{
+.mexer :hover{
     transform: scale(1.2);
     transition: 0.2s;
 }
@@ -160,8 +160,43 @@ li:hover{
     height: 50vh;
 }
 
-.quadrado1{
+
+
+  
+  .quadrado1 {
+    position: relative;
     width: 25vw;
     height: 35vh;
     background-color: #bebebe;
-}
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .conteudo_oculto {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background-color: aquamarine;
+  }
+  
+  .quadrado1:hover .conteudo_oculto {
+    opacity: 1;
+  }
+  
+  .conteudo_visivel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  
+  .quadrado1:hover .conteudo_visivel {
+    opacity: 0;
+  }

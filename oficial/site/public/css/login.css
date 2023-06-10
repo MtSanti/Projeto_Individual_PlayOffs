@@ -12,12 +12,6 @@ body{
     background-color: rgb(5, 2, 68);
 }
 
-#cubrir{
-    height: 9vh;
-    background-color: rgb(0, 0, 0);
-
-}
-
 .header .containner{
     width: 90%;
     align-items: center;
@@ -80,11 +74,16 @@ li:hover{
     justify-content: center;
 }
 
+/* --------------------------------  */
+.container {
+    display: flex;
+    width: 80%;
+    margin: auto;   
+  }
 
 .fundo_cadastro {
     width: 100%;
     background-image: url(../assets/imgs/fundo_cad.png);
-    /* background-color: black; */
     height: 100vh;
     background-repeat: no-repeat;
     background-size: cover;
@@ -108,7 +107,6 @@ li:hover{
     width:30vw;
     background-color: rgb(241, 241, 241);
     border-radius: 0% 2% 2% 0%;
-    padding: 2vmax;
     display: flex;
     justify-content: center;    
     flex-direction: column;
@@ -127,37 +125,43 @@ li:hover{
 
 .img_cad{
     width: 16vw;
-    
 }
 
 .cadas{
     display: flex;
-    flex-direction: column;
     align-items: center;
 }
 
-.inputs h4{
-    margin: 7% 0 0 0 ;
-}
-
-.inputs input{
-    padding-left: 7%;
-    border-radius: 3%;
-    border: solid 2px rgb(255, 123, 0)
-}
-
 .inputs{
-    width: 25vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    height: 5vh;
 }
+
+h4{
+    margin: none;
+}
+
+.input {
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    background-color: #ccc;
+    box-shadow: inset 2px 5px 10px rgba(0,0,0,0.3);
+    transition: 300ms ease-in-out;
+    height: 4.5vh;
+
+  }
+  
+  .input:focus {
+    background-color: white;
+    transform: scale(1.05);
+    box-shadow: 13px 13px 100px #969696,
+               -13px -13px 100px #ffffff;
+  }
 
 #butoo{
     width: 15vw;
     display: flex;
     align-items: center;
-    color: rgb(244, 52, 52);
     justify-content: center;
     margin-top: 5%;
     background-color: black;

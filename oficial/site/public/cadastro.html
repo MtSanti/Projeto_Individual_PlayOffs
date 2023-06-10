@@ -20,8 +20,8 @@
 <body>
 
     <!--header inicio-->
-     <!-- -- Navbar -- -->
-     <div class="header">
+    <!-- -- Navbar -- -->
+    <div class="header">
         <div class="containner">
             <div class="navbar">
                 <div class="logo">
@@ -31,7 +31,7 @@
                     <ul>
                         <li><a href="index.html">HOME</a></li>
                         <li><a href="sobre.html">SOBRE MIM</a></li>
-                        <li><a href="">HISTÓRIA</a></li>
+                        <li><a href="historia.html">HISTÓRIA</a></li>
                     </ul>
                 </div>
             </div>
@@ -51,48 +51,41 @@
                 <div class="parteimg">
                     <img src="assets/imgs/imgTaty.png" alt="" class="img_cad">
                 </div>
-    
+
                 <div class="informacao">
                     <div class="cadas">
                         <span>Cadastre-se</span>
                         <span>E se torne membro oficial</span>
                     </div>
                     <div class="inputs">
-    
-                        <h4>Nome<i class="fa-solid fa-user user" style="color: #01225b;"></i></h4>
-    
-    
-    
-                        <input type="text" placeholder="Digite seu nome" id="nome_input">
-    
-    
-                        <h4>Email<i class="fa-solid fa-envelope user" style="color: #01225b;"></i></h4>
-                        <input type="email" placeholder="hello@gmail.com" id="email_input">
-    
-    
-    
-                        <h4>Senha</h4>
-                        <input type="password" placeholder="********" id="senha_input">
-    
-    
-    
-                        <h4>Confirmar Senha</h4>
-                        <input type="password" placeholder="********" id="confirmacao_senha_input">
-                        <small><a href="../Pagina Login/login.html" style="color: #01225b;">Já posuui conta? Faça login</a></small>
 
-                        <div class="btcad"><button id="butoo" onclick="cadastrar()"><a href="">Cadastrar</a></button></div>
+                        <h4>Nome</h4>
+                        <input type="text" placeholder="Digite seu nome" id="nome_input" class="input">
+
+                        <h4>Email</h4>
+                        <input type="email" placeholder="hello@gmail.com" id="email_input" class="input">
+
+                        <h4>Senha</h4>
+                        <input type="password" placeholder="********" id="senha_input" class="input">
+
+                        <h4>Confirmar Senha</h4>
+                        <input type="password" placeholder="********" id="confirmacao_senha_input" class="input">
+                        <small><a href="login.html" style="color: #01225b;">Já posuui conta? Faça login</a></small>
+
+                        <div class="btcad"><button id="butoo" onclick="cadastrar()"><a href="">Cadastrar</a></button>
+                        </div>
                         <div>
                             <span id="erro">.</span>
                         </div>
                     </div>
                 </div>
-    
+
             </div>
         </div>
-                </div>
-                <div id="div_erros_login"></div>
-            </div>
-        </div>
+    </div>
+    <div id="div_erros_login"></div>
+    </div>
+    </div>
     </div>
 
 </body>
@@ -112,52 +105,56 @@
 
         if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
             cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-                }else if(senhaVar != confirmacaoSenhaVar){
+            mensagem_erro.innerHTML = "Preencha todos os campsos";
+        } else if (senhaVar != confirmacaoSenhaVar) {
 
-                    cardErro.style.display = "block"
+            cardErro.style.display = "block"
             mensagem_erro.innerHTML = "(Suas senhas não coincidem)";
-                } else {
+        } else if (senhaVar.length != 6) {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "A senha deve ter no minimo 6 caracteres";
+        } else {
             console.log("aaaaaaaaaaaaaaaaaaaaaaaaa")
             fetch("/usuarios/cadastrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                // crie um atributo que recebe o valor recuperado aqui
-                // Agora vá para o arquivo routes/usuario.js
-                nomeServer: nomeVar,
-                emailServer: emailVar,
-                senhaServer: senhaVar
-            })
-        }).then(function (resposta) {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    nomeServer: nomeVar,
+                    emailServer: emailVar,
+                    senhaServer: senhaVar
+                })
+            }).then(function (resposta) {
 
-            console.log("resposta: ", resposta);
+                console.log("resposta: ", resposta);
 
-            if (resposta.ok) {
-                cardErro.style.display = "block";
-                console.log("ASDJISADIJOSADOISDAOIJSADJOIDASOIJJOID")
-                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+                if (resposta.ok) {
+                    cardErro.style.display = "block";
+                    console.log("ASDJISADIJOSADOISDAOIJSADJOIDASOIJJOID")
+                    mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
-                setTimeout(() => {
-                    window.location = "login.html";
-                }, "2000")
+                    setTimeout(() => {
+                        window.location = "login.html";
+                    }, "2000")
 
-                limparFormulario();
+                    limparFormulario();
+                    // finalizarAguardar();
+                } else {
+                    throw ("Houve um erro ao tentar realizar o cadastro!");
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
                 // finalizarAguardar();
-            } else {
-                throw ("Houve um erro ao tentar realizar o cadastro!");
-            }
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-            // finalizarAguardar();
-        });
+            });
 
-        return false;        }
+            return false;
+        }
 
         // Enviando o valor da nova input
-        
+
     }
 
     function sumirMensagem() {

@@ -60,6 +60,40 @@ function entrar(req, res) {
 
 }
 
+function enviarpontos(req, res) {
+    var pontos = req.body.pontosServer;
+
+    usuarioModel.enviarpontos(pontos)
+        .then(function(resultado) {
+            res.json(resultado);
+        })
+        .catch(function(erro) {
+            console.log(erro);
+            console.log("\nHouve um erro para enviar os pontos! Erro: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+// function enviarpontos(req, res) {
+//     var pontos = req.body.pontosServer
+
+//     usuarioModel.enviarpontos(pontos)
+//         .then(
+//             function (resultado) {
+//                 res.json(resultado);
+//             }.catch(
+//                 function (erro) {
+//                     console.log(erro);
+//                     console.log(
+//                         "\nHouve um erro para enviar os pontos! Erro: ",
+//                         erro.sqlMessage
+//                     );
+//                     res.status(500).json(erro.sqlMessage);
+//                 }
+//             )
+//         )
+// }
+
 function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nome = req.body.nomeServer;
@@ -98,5 +132,6 @@ module.exports = {
     entrar,
     cadastrar,
     listar,
-    testar
+    testar,
+    enviarpontos
 }

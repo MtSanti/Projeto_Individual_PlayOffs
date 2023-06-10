@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/quiz.css">
+    <script src="https://kit.fontawesome.com/563102be75.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="../assets/icon/iconsite.png">
+</head>
+<!-- onload="validarSessao()" -->
+
+<body>
+    <div class="header">
+        <div class="containner">
+            <div class="navbar">
+                <div class="logo">
+                    <img src="../assets/imgs/logosite.png" alt="" class="imgLogo">
+                </div>
+                <div class="linha">
+                    <ul>
+                        <li><a href="">HOME</a></li>
+                        <li><a href="sobre.html">SOBRE MIM</a></li>
+                        <li><a href="">HISTÓRIA</a></li>
+                        <li>|</li>
+                        <li id="iconmenuperfil" onclick="clickPerfil()"><i class="fa-solid fa-user user"
+                                style="color: #ffffff;"></i></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="menuflutuante" id="subsub">
+        <span class="blocomenuflu"></span>
+        <span class="conta">CONTA</span>
+        <span class="imagemperfil"></span>
+        <span class="nomeconta" id="nome_do_usuario">Nome User</span>
+        <span class="contaemail" id="email_do_usuario">nomeuser@sptech.school</span>
+        <span class="cadastrarusuario mexer" onclick="cadastrar()">Acompanhar Jogos</span>
+        <span class="gerenciarconta mexer" onclick="gerenciarconta()">Times Favoritos</span>
+        <span class="contadashboard mexer" onclick="dashboard()">Quiz</span>
+        <span class="rankingquiz mexer" onclick="dashboard()">Ranking</span>
+        <span class="contalinha"></span>
+        <span class="contalogout mexer" onclick="limparSessao()">Fazer Logout</span>
+    </div>
+
+    <div id="quiz_containner" style="display: none;">
+        <div id="quiz">
+            <div class="titulo">
+                <h1>Quiz sobre Playoffs da NBA</h1>
+            </div>
+            <div id="question"></div>
+            <div id="options">
+                <div>
+                    <input type="radio" name="choice" value="a" id="optionA"><label for="optionA"
+                        id="optionAText"></label>
+                </div>
+                <div>
+                    <input type="radio" name="choice" value="b" id="optionB"><label for="optionB"
+                        id="optionBText"></label>
+                </div>
+                <div>
+                    <input type="radio" name="choice" value="c" id="optionC"><label for="optionC"
+                        id="optionCText"></label>
+                </div>
+                <div>
+                    <input type="radio" name="choice" value="d" id="optionD"><label for="optionD"
+                        id="optionDText"></label>
+                </div>
+            </div>
+
+            <div id="proximaPergunta">
+                <span id="submit"><i class="fa-solid fa-forward fa-2xl" style="color: #ffffff;"></i></span>
+            </div>
+            <div id="result"></div>
+        </div>
+    </div>
+    <!-- <div id="quiz_containner2" style="display: none;">
+        <div id="quiz">
+            <div class="titulo">
+                <h1>Você conhece os jogadores?</h1>
+            </div>
+            <div id="question"></div>
+            <div id="options">
+                <div>
+                    <input type="radio" name="choice" value="a" id="optionA"><label for="optionA"
+                        id="optionAText"></label>
+                </div>
+                <div>
+                    <input type="radio" name="choice" value="b" id="optionB"><label for="optionB"
+                        id="optionBText"></label>
+                </div>
+                <div>
+                    <input type="radio" name="choice" value="c" id="optionC"><label for="optionC"
+                        id="optionCText"></label>
+                </div>
+                <div>
+                    <input type="radio" name="choice" value="d" id="optionD"><label for="optionD"
+                        id="optionDText"></label>
+                </div>
+            </div>
+
+            <div id="proximaPergunta">
+                <span id="submit"><i class="fa-solid fa-forward fa-2xl" style="color: #ffffff;"></i></span>
+            </div>
+            <div id="result"></div>
+        </div>
+    </div> -->
+
+
+
+
+    <!-- ---------------------------- acessar os quiz ------------------------------------->
+    <div id="agrupados">
+        <span id="testequiz">Teste seus conhecimentos</span>
+        <div class="caixaquiz">
+            <div id="quizPlayoffs" onclick="iniciarQuiz()">
+                <h1>Quiz Geral</h1>
+            </div>
+            <div id="quizJogadores" onclick="iniciarQuiz2()">
+                <h1>Quiz Jogadores</h1>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="../js/funcoes.js"></script>
+
+<script src="quiz.js"></script>
+<script>
+    var minhaDiv = document.getElementById('quizPlayoffs');
+    var minhaDiv2 = document.getElementById('quizJogadores');
+
+    minhaDiv.addEventListener('mouseover', function () {
+        this.classList.add('anima');
+    });
+
+    minhaDiv.addEventListener('mouseout', function () {
+        this.classList.remove('anima');
+    });
+    minhaDiv2.addEventListener('mouseover', function () {
+        this.classList.add('anima');
+    });
+
+    minhaDiv2.addEventListener('mouseout', function () {
+        this.classList.remove('anima');
+    });
+
+    function iniciarQuiz() {
+        quiz_containner.style.display = "block"
+    }
+
+    function finalizarQuiz() {
+        var pontosVar = score
+        quiz_containner.style.display = "none"
+        console.log("aaaaaaaaaaaaaaaaaaaaaaaaa")
+            fetch("/usuarios/enviarpontos", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    pontosServer: pontosVar
+                })
+            }).then(function (resposta) {
+
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    console.log("ASDJISADIJOSADOISDAOIJSADJOIDASOIJJOID")
+                   
+                } else {
+                    console.log("fudeu td aq")
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                // finalizarAguardar();
+            });
+
+            return false;
+    }
+    function iniciarQuiz2() {
+        quiz_containner2.style.display = "block"
+    }
+
+    function finalizarQuiz2() {
+        quiz_containner2.style.display = "none"
+    }
+
+    function clickPerfil() {
+        if (subsub.style.display == 'flex') {
+            subsub.style.display = 'none'
+        } else {
+            subsub.style.display = 'flex'
+        }
+    }
+</script>

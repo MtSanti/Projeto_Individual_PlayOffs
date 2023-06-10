@@ -7,7 +7,6 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/usuario.css">
     <script src="https://kit.fontawesome.com/563102be75.js" crossorigin="anonymous"></script>
-    <script src="js/funcoes.js"></script>
     <link rel="icon" href="assets/icon/iconsite.png">
 </head>
 <body onload="validarSessao()">
@@ -19,9 +18,9 @@
                 </div>
                 <div class="linha">
                     <ul>
-                        <li><a href="">HOME</a></li>
-                        <li><a href="sobre.html">SOBRE MIM</a></li>
-                        <li><a href="">HISTÓRIA</a></li>
+                        <li class="mexer"><a href="">HOME</a></li>
+                        <li class="mexer"><a href="sobre.html">SOBRE MIM</a></li>
+                        <li class="mexer"><a href="dashboard/quiz_perguntas_gerais.html">QUIZ</a></li>
                         <li>|</li>
                         <li id="iconmenuperfil"onclick="clickPerfil()"><i class="fa-solid fa-user user" style="color: #ffffff;"></i></li>
 
@@ -39,7 +38,7 @@
         <span class="contaemail" id="email_do_usuario">nomeuser@sptech.school</span>
         <span class="cadastrarusuario mexer" onclick="cadastrar()">Acompanhar Jogos</span>
         <span class="gerenciarconta mexer"onclick="gerenciarconta()">Times Favoritos</span>
-        <span class="contadashboard mexer" onclick="dashboard()">Quiz</span>
+        <span class="contadashboard mexer" onclick="quizentrar()">Quiz</span>
         <span class="contalinha"></span>
         <span class="contalogout mexer" onclick="limparSessao()">Fazer Logout</span>
     </div>
@@ -60,6 +59,9 @@
         subsub.style.display = 'none'
     } else {
         subsub.style.display = 'flex'
+    }
+    function quizentrar() {
+        window.location.href = "dashboard/quiz_perguntas_gerais.html"
     }
 }
 </script>
