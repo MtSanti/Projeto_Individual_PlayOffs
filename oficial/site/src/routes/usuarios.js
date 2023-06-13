@@ -25,6 +25,10 @@ router.post("/respostas_quiz_geral/:idUsuario", function (req, res) {
     usuarioController.respostas_quiz_geral(req, res);
 })
 
+router.get("/atualizar_rankingGeral", function (req, res) {
+    usuarioController.atualizar_rankingGeral(req, res);
+});
+
 router.post("/autenticar", function (req, res) {
     usuarioController.entrar(req, res);
 });

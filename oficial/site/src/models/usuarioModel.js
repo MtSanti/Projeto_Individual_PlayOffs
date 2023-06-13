@@ -56,9 +56,23 @@ function enviarpontosJogador(pontosJogador,fkUsuario) {
 }
 
 function dadosGrafico() {
-    var instrucao = `select sum(pontosCertos) as pontos, nome from quiz join Usuario on idUsuario = fkusuario group by pontosCertos;`
+    var instrucao = `select sum(pontosCertos) as pontos, nome from quiz join Usuario on idUsuario = fkusuario group by nome;`
     return database.executar(instrucao);
 } 
+
+
+function atualizar_rankingGeral() {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    var instrucao = `
+    SELECT Usuario.Nome as nickname, 
+    quiz.pontosCertos AS pontos,
+    fkUsuario  FROM quiz JOIN Usuario 
+    ON fkUsuario = idUsuario
+	ORDER BY pontos DESC;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
 
 module.exports = {
     entrar,
@@ -66,5 +80,6 @@ module.exports = {
     listar,
     enviarpontos,
     enviarpontosJogador,
-    dadosGrafico
+    dadosGrafico, 
+    atualizar_rankingGeral
 };

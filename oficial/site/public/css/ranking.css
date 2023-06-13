@@ -241,6 +241,7 @@ a {
     margin-top: 5%;
 }
 
+
 .graficos {
     display: flex;
     flex-direction: column;
@@ -277,7 +278,6 @@ a {
     justify-content: center;
     background-color: #00d5ff;
     border-radius: 0 0 20px 20px;
-    margin-bottom: 25%;
 }
 
 .titulo_ranking span {
@@ -285,7 +285,29 @@ a {
     font-weight: 600;
 }
 
+
+#quizGeral{
+    width: 80%;
+    height: 70vh;
+    display: flex;
+    background-color: #7c6de2be;
+    margin-left: 55px;
+    margin-top: 2%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.posicao{
+    display: flex;
+}
+
+.pontos{
+    margin-right: 10px;
+}
+
 .botoes_de_acesso {
+    margin-top: 25%;
     display: flex;
     flex-direction: column;
     justify-content: center;
