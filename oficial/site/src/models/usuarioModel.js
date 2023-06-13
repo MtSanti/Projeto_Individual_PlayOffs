@@ -30,21 +30,41 @@ function cadastrar(nome, email, senha) {
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
-function enviarpontos(pontos) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function enviarpontos():",pontos);
+function enviarpontos(pontos,fkUsuario) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function enviarpontos():", pontos, fkUsuario);
+    console.log(fkUsuario)
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var pontosErrados = 10 - pontos
+    var instrucao = `
+        INSERT INTO quiz (descrição, pontosCertos, pontosErrados, fkUsuario) VALUES ('QuizGeral', ${pontos}, ${pontosErrados}, ${fkUsuario});
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+function enviarpontosJogador(pontosJogador,fkUsuario) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function enviarpontosJogador():",pontosJogador);
     
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
+    var pontosErrados = 10 - pontosJogador
     var instrucao = `
-        INSERT INTO quiz (pontos) VALUES ('${pontos}');
+        INSERT INTO quiz (descrição, pontosCertos, pontosErrados, fkUsuario) VALUES ('QuizJogador',${pontosJogador}, ${pontosErrados}, ${fkUsuario});
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
+function dadosGrafico() {
+    var instrucao = `select sum(pontosCertos) as pontos, nome from quiz join Usuario on idUsuario = fkusuario group by pontosCertos;`
+    return database.executar(instrucao);
+} 
+
 module.exports = {
     entrar,
     cadastrar,
     listar,
-    enviarpontos
+    enviarpontos,
+    enviarpontosJogador,
+    dadosGrafico
 };

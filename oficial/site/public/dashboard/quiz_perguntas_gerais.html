@@ -34,6 +34,10 @@
         </div>
     </div>
 
+
+    <!-- ----------------------------------------- menu flutuante ------------------------------  -->
+
+
     <div class="menuflutuante" id="subsub">
         <span class="blocomenuflu"></span>
         <span class="conta">CONTA</span>
@@ -48,12 +52,15 @@
         <span class="contalogout mexer" onclick="limparSessao()">Fazer Logout</span>
     </div>
 
+
+
+    <!-- ------------------------- quiz geral ----------------------------------- -->
     <div id="quiz_containner" style="display: none;">
         <div id="quiz">
             <div class="titulo">
                 <h1>Quiz sobre Playoffs da NBA</h1>
             </div>
-            <div id="question"></div>
+            <div id="pergunta"></div>
             <div id="options">
                 <div>
                     <input type="radio" name="choice" value="a" id="optionA"><label for="optionA"
@@ -79,39 +86,40 @@
             <div id="result"></div>
         </div>
     </div>
-    <!-- <div id="quiz_containner2" style="display: none;">
-        <div id="quiz">
-            <div class="titulo">
-                <h1>Você conhece os jogadores?</h1>
+
+
+    <!-- ------------------------------- quiz Jogadores ----------------------------------------------  -->
+    <div id="quiz_containner_jogador" style="display: none;">
+        <div id="quiz_jogador">
+            <div class="titulo_jogador">
+                <h1>Quem é o jogador?</h1>
             </div>
-            <div id="question"></div>
-            <div id="options">
+            <div id="pergunta_jogador"></div>
+            <div id="options_jogador">
                 <div>
-                    <input type="radio" name="choice" value="a" id="optionA"><label for="optionA"
-                        id="optionAText"></label>
+                    <input type="radio" name="choice" value="a" id="optionAJ"><label for="optionAJ"
+                        id="optionATextJogador"></label>
                 </div>
                 <div>
-                    <input type="radio" name="choice" value="b" id="optionB"><label for="optionB"
-                        id="optionBText"></label>
+                    <input type="radio" name="choice" value="b" id="optionBJ"><label for="optionBJ"
+                        id="optionBTextJogador"></label>
                 </div>
                 <div>
-                    <input type="radio" name="choice" value="c" id="optionC"><label for="optionC"
-                        id="optionCText"></label>
+                    <input type="radio" name="choice" value="c" id="optionCJ"><label for="optionCJ"
+                        id="optionCTextJogador"></label>
                 </div>
                 <div>
-                    <input type="radio" name="choice" value="d" id="optionD"><label for="optionD"
-                        id="optionDText"></label>
+                    <input type="radio" name="choice" value="d" id="optionDJ"><label for="optionDJ"
+                        id="optionDTextJogador"></label>
                 </div>
             </div>
 
             <div id="proximaPergunta">
-                <span id="submit"><i class="fa-solid fa-forward fa-2xl" style="color: #ffffff;"></i></span>
+                <span id="submit_jogador"><i class="fa-solid fa-forward fa-2xl" style="color: #ffffff;"></i></span>
             </div>
-            <div id="result"></div>
+            <div id="resultado_jogador"></div>
         </div>
-    </div> -->
-
-
+    </div>
 
 
     <!-- ---------------------------- acessar os quiz ------------------------------------->
@@ -130,7 +138,7 @@
 
 </html>
 <script src="../js/funcoes.js"></script>
-
+<script src="quizJogador.js"></script>
 <script src="quiz.js"></script>
 <script>
     var minhaDiv = document.getElementById('quizPlayoffs');
@@ -156,42 +164,76 @@
     }
 
     function finalizarQuiz() {
-        var pontosVar = score
+        var pontosVar = pontuacao
+        var idUsuarioVar = sessionStorage.ID_USUARIO
+
         quiz_containner.style.display = "none"
         console.log("aaaaaaaaaaaaaaaaaaaaaaaaa")
-            fetch("/usuarios/enviarpontos", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    // crie um atributo que recebe o valor recuperado aqui
-                    // Agora vá para o arquivo routes/usuario.js
-                    pontosServer: pontosVar
-                })
-            }).then(function (resposta) {
+        fetch("/usuarios/enviarpontos", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                pontosServer: pontosVar,
+                fkUsuarioServer: idUsuarioVar
+            })
+        }).then(function (resposta) {
 
-                console.log("resposta: ", resposta);
+            console.log("resposta: ", resposta);
 
-                if (resposta.ok) {
-                    console.log("ASDJISADIJOSADOISDAOIJSADJOIDASOIJJOID")
-                   
-                } else {
-                    console.log("fudeu td aq")
-                }
-            }).catch(function (resposta) {
-                console.log(`#ERRO: ${resposta}`);
-                // finalizarAguardar();
-            });
+            if (resposta.ok) {
+                console.log("ASDJISADIJOSADOISDAOIJSADJOIDASOIJJOID")
 
-            return false;
+            } else {
+                console.log("fudeu td aq")
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            // finalizarAguardar();
+        });
+
+        return false;
     }
     function iniciarQuiz2() {
-        quiz_containner2.style.display = "block"
+        quiz_containner_jogador.style.display = "block"
     }
 
     function finalizarQuiz2() {
-        quiz_containner2.style.display = "none"
+        var pontosJogadorVar = pontuacao_jogador
+        var idUsuarioVar = sessionStorage.ID_USUARIO
+
+        quiz_containner_jogador.style.display = "none"
+        console.log("aaaaaaaaaaaaaaaaaaaaaaaaa")
+        fetch("/usuarios/enviarpontosJogador", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                pontosJogadorServer: pontosJogadorVar,
+                fkUsuarioServer: idUsuarioVar
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                console.log("ASDJISADIJOSADOISDAOIJSADJOIDASOIJJOID")
+
+            } else {
+                console.log("fudeu td aq")
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            // finalizarAguardar();
+        });
+
+        return false;
     }
 
     function clickPerfil() {

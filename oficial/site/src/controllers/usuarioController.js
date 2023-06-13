@@ -7,6 +7,8 @@ function testar(req, res) {
     res.json("ESTAMOS FUNCIONANDO!");
 }
 
+
+
 function listar(req, res) {
     usuarioModel.listar()
         .then(function (resultado) {
@@ -62,8 +64,23 @@ function entrar(req, res) {
 
 function enviarpontos(req, res) {
     var pontos = req.body.pontosServer;
+    var fkUsuario = req.body.fkUsuarioServer;
 
-    usuarioModel.enviarpontos(pontos)
+    usuarioModel.enviarpontos(pontos,fkUsuario)
+        .then(function(resultado) {
+            res.json(resultado);
+        })
+        .catch(function(erro) {
+            console.log(erro);
+            console.log("\nHouve um erro para enviar os pontos! Erro: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+function enviarpontosJogador(req, res) {
+    var pontosJogador = req.body.pontosJogadorServer;
+    var fkUsuario = req.body.fkUsuarioServer;
+
+    usuarioModel.enviarpontosJogador(pontosJogador,fkUsuario)
         .then(function(resultado) {
             res.json(resultado);
         })
@@ -74,25 +91,6 @@ function enviarpontos(req, res) {
         });
 }
 
-// function enviarpontos(req, res) {
-//     var pontos = req.body.pontosServer
-
-//     usuarioModel.enviarpontos(pontos)
-//         .then(
-//             function (resultado) {
-//                 res.json(resultado);
-//             }.catch(
-//                 function (erro) {
-//                     console.log(erro);
-//                     console.log(
-//                         "\nHouve um erro para enviar os pontos! Erro: ",
-//                         erro.sqlMessage
-//                     );
-//                     res.status(500).json(erro.sqlMessage);
-//                 }
-//             )
-//         )
-// }
 
 function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
@@ -128,10 +126,32 @@ function cadastrar(req, res) {
     }
 }
 
+
+function respostas_quiz_geral(req, res) {
+    var idUsuario = req.params.idUsuario
+    usuarioModel.respostas_quiz_geral(idUsuario)
+        .then(function(resultado) {
+            res.json(resultado);
+        })
+        .catch(function(erro) {
+            console.log(erro);
+            console.log("\nHouve um erro para enviar os pontos! Erro: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+async function dadosGrafico(req, res) {
+    var resposta = await usuarioModel.dadosGrafico();
+    res.status(200).json(resposta);
+}
+
 module.exports = {
     entrar,
     cadastrar,
     listar,
     testar,
-    enviarpontos
+    enviarpontos,
+    enviarpontosJogador,
+    respostas_quiz_geral,
+    dadosGrafico
 }

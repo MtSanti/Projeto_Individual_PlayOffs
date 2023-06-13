@@ -18,9 +18,19 @@ router.post("/cadastrar", function (req, res) {
 router.post("/enviarpontos", function (req, res) {
     usuarioController.enviarpontos(req, res);
 })
+router.post("/enviarpontosJogador", function (req, res) {
+    usuarioController.enviarpontosJogador(req, res);
+})
+router.post("/respostas_quiz_geral/:idUsuario", function (req, res) {
+    usuarioController.respostas_quiz_geral(req, res);
+})
 
 router.post("/autenticar", function (req, res) {
     usuarioController.entrar(req, res);
+});
+
+router.get("/dadosGrafico", function (req, res) {
+    usuarioController.dadosGrafico(req, res);
 });
 
 module.exports = router;

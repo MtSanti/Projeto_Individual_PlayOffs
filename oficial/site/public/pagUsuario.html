@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="css/usuario.css">
     <script src="https://kit.fontawesome.com/563102be75.js" crossorigin="anonymous"></script>
     <link rel="icon" href="assets/icon/iconsite.png">
+    
+<script src="js/funcoes.js"></script>
 </head>
 <body onload="validarSessao()">
     <div class="header">
@@ -19,8 +21,8 @@
                 <div class="linha">
                     <ul>
                         <li class="mexer"><a href="">HOME</a></li>
-                        <li class="mexer"><a href="sobre.html">SOBRE MIM</a></li>
                         <li class="mexer"><a href="dashboard/quiz_perguntas_gerais.html">QUIZ</a></li>
+                        <li class="mexer"><a href="dashboard/ranking.html">RANKING</a></li>
                         <li>|</li>
                         <li id="iconmenuperfil"onclick="clickPerfil()"><i class="fa-solid fa-user user" style="color: #ffffff;"></i></li>
 
@@ -34,8 +36,8 @@
         <span class="blocomenuflu"></span>
         <span class="conta">CONTA</span>
         <span class="imagemperfil"></span>
-        <span class="nomeconta" id="nome_do_usuario">Nome User</span>
-        <span class="contaemail" id="email_do_usuario">nomeuser@sptech.school</span>
+        <span id="b_usuario">Nome User</span>
+        <span id="email_do_usuario">nomeuser@sptech.school</span>
         <span class="cadastrarusuario mexer" onclick="cadastrar()">Acompanhar Jogos</span>
         <span class="gerenciarconta mexer"onclick="gerenciarconta()">Times Favoritos</span>
         <span class="contadashboard mexer" onclick="quizentrar()">Quiz</span>
@@ -52,8 +54,12 @@
 </body>
 </html>
 
-<script src="js/funcoes.js"></script>
 <script>
+    console.log(sessionStorage.NOME_USUARIO)
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    email_do_usuario.innerHTML = sessionStorage.EMAIL_USUARIO;
+
+
     function clickPerfil() {
     if (subsub.style.display == 'flex') {
         subsub.style.display = 'none'

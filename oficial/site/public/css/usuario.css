@@ -98,22 +98,7 @@ ul, li, a{
     transition: 0.2s;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* ----------------------------------- menu flutuante -------------------------------- */
 
 .mexer{
     cursor: pointer;
@@ -159,7 +144,7 @@ ul, li, a{
     background-color: rgb(104, 104, 137);
 }
 
-.nomeconta {
+#b_usuario {
     display: flex;
     position: absolute;
     font-weight: 300;
@@ -170,18 +155,7 @@ ul, li, a{
     left: 24%;
 }
 
-/* .adminconta{
-    display: flex;
-    position: absolute;
-    font-weight: 300;
-    font-size: 100%;
-    line-height: 18px;
-    color: red;
-    top: 23%;
-    left: 62.5%;
-} */
-
-.contaemail {
+#email_do_usuario {
     display: flex;
     position: absolute;
     font-weight: 300;
