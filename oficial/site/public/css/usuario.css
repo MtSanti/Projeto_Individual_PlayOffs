@@ -216,3 +216,80 @@ ul, li, a{
     left: 6.5%;
     cursor: pointer;
 }
+
+/* --------------------------------------------------  */
+
+#conteudo{
+    width: 100%;
+    height: 85vh;
+    background-image: url(../assets/imgs/escolha.png);
+    background-repeat: no-repeat;
+    /* background-size: cover; */
+    margin-top: 4%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.opcaoUsuario{
+    width: 65%;
+    height: 70vh;
+    background-color: #000000ab;
+    border-radius: 10px;
+
+}
+
+.escritaEntrada{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 25vh;
+}
+.escritaEntrada div{
+    font-size: 200%;
+    font-weight: 700;
+    color: aliceblue;
+}
+
+#b_usuario2{
+    color: #FF8A00;
+}
+
+.escolha{
+    display: flex;
+    justify-content: space-evenly;
+    height: 40vh;
+    align-items: center;
+}
+
+.jogos{
+    height: 35vh;
+    width: 20vw;
+    background-color: #FF8A00;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 170%;
+    border-radius: 10px;
+    box-shadow: -5px -5px 25px -11px rgb(255, 149, 0); 
+    cursor: pointer;
+}
+
+.jogos:hover{
+    transform: scale(1.2);
+    transition: 0.8s;
+}
+
+
+
+
+.rodape {
+    height: 3vmax;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+    color: white;
+    border-top: 1px solid white;
+}
