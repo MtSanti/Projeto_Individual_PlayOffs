@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOGOS | Playoffs</title>
+    
+    <script src="https://kit.fontawesome.com/563102be75.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="assets/icon/iconsite.png">
+    <link rel="stylesheet" href="css/jogos.css">
+    <script src="js/funcoes.js"></script>
+</head>
+<body>
+    <body onload="validarSessao()">
+        <div class="header">
+            <div class="containner">
+                <div class="navbar">
+                    <div class="logo">
+                        <img src="assets/imgs/logosite.png" alt="" class="imgLogo">
+                    </div>
+                    <div class="linha">
+                        <ul>
+                            <li class="mexer"><a href="jogos.html">JOGOS</a></li>
+                            <li class="mexer"><a href="dashboard/quiz_perguntas_gerais.html">QUIZ</a></li>
+                            <li class="mexer"><a href="dashboard/ranking.html">RANKING</a></li>
+                            <li>|</li>
+                            <li id="iconmenuperfil" onclick="clickPerfil()"><i class="fa-solid fa-user user"
+                                    style="color: #ffffff;"></i></li>
+    
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="menuflutuante" id="subsub">
+            <span class="blocomenuflu"></span>
+            <span class="conta">CONTA</span>
+            <span class="imagemperfil"></span>
+            <span class="nomeconta" id="b_usuario">Nome User</span>
+            <span class="contaemail" id="email_do_usuario">nomeuser@sptech.school</span>
+            <span class="cadastrarusuario mexer" onclick="jogos()">Acompanhar Jogos</span>
+            <span class="gerenciarconta mexer" onclick="ranking()">Ranking</span>
+            <span class="contadashboard mexer" onclick="quizentrar()">Quiz</span>
+            <span class="contalinha"></span>
+            <span class="contalogout mexer" onclick="limparSessao()">Fazer Logout</span>
+        </div>
+        <script>
+            function jogos() {
+                window.location.href = "../jogos.html"
+            }
+    
+            function ranking() {
+                window.location.href = "dashboard/ranking.html"
+            }
+            function quizentrar() {
+                window.location.href = "dashboard/quiz_perguntas_gerais.html"
+            }
+        </script>
+
+
+
+        <!-- -------------- conteudo -----------------------  -->
+        <div id="conteudo">
+            <div class="semiFinais">
+                <div class="semiOeste">
+                    <div class="jogo1">
+                        <div class="semi1"></div>
+                        <div class="times">
+                            Heat ganha por 4-2
+                        </div>
+                    </div>
+                    <div class="jogo1">
+                        <div class="semi2"></div>
+                        <div class="times">
+                            Celtics ganha por 4-3
+                        </div>
+                    </div>
+                </div>
+                <div class="semiLeste">
+                    <div class="jogo1">
+                        <div class="semi3"></div>
+                        <div class="times">
+                            Nuggets ganha por 4-2
+                        </div>
+                    </div>
+                    <div class="jogo1">                      
+                        <div class="semi4"></div>
+                        <div class="times">
+                            Lakers ganha por 4-2
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="finaisConferencia">
+                <div class="jogo1">                      
+                    <div class="finalLeste"></div>
+                    <div class="times">
+                        Heat ganha por 4-3
+                    </div>
+                </div>
+                <div class="jogo1" style="margin-top: 15%;">                      
+                    <div class="finalOeste"></div>
+                    <div class="times">
+                        Nuggets ganha por 4-0
+                    </div>
+                </div>
+            </div>
+            <div class="final">
+                <div class="campeao">
+                    Nuggets campeão 
+                </div>
+                <div class="jogo1">
+                    <div class="final1"></div>
+                    <div class="times">
+                        Nuggets ganha por 4-1
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    <div class="rodape">
+        <span>Projeto Individual - 1ADSC</span>
+    </div>
+</body>
+</html>
+
+<script>
+    console.log(sessionStorage.EMAIL_USUARIO)
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    email_do_usuario.innerHTML = sessionStorage.EMAIL_USUARIO;
+
+
+    function clickPerfil() {
+        if (subsub.style.display == 'flex') {
+            subsub.style.display = 'none'
+        } else {
+            subsub.style.display = 'flex'
+        }
+        function quizentrar() {
+            window.location.href = "dashboard/quiz_perguntas_gerais.html"
+        }
+    }
+</script>

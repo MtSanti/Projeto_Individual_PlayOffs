@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking | Playoffs</title>
+
+    <link rel="stylesheet" href="../css/ranking.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://kit.fontawesome.com/563102be75.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="../assets/icon/iconsite.png">
+</head>
+
+<body>
+    <div class="header">
+        <div class="containner">
+            <div class="navbar">
+                <div class="logo">
+                    <img src="../assets/imgs/logosite.png" alt="" class="imgLogo">
+                </div>
+                <div class="linha">
+                    <ul>
+                        <li class="mexer"><a href="../jogos.html">JOGOS</a></li>
+                        <li class="mexer"><a href="quiz_perguntas_gerais.html">QUIZ</a></li>
+                        <li class="mexer"><a href="">RANKING</a></li>
+                        <li>|</li>
+                        <li id="iconmenuperfil" onclick="clickPerfil()"><i class="fa-solid fa-user user"
+                                style="color: #ffffff;"></i></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="menuflutuante" id="subsub">
+        <span class="blocomenuflu"></span>
+        <span class="conta">CONTA</span>
+        <span class="imagemperfil"></span>
+        <span class="nomeconta" id="nome_do_usuario">Nome User</span>
+        <span class="contaemail" id="email_do_usuario">nomeuser@sptech.school</span>
+        <span class="cadastrarusuario mexer" onclick="jogos()">Acompanhar Jogos</span>
+        <span class="gerenciarconta mexer" onclick="ranking()">Ranking</span>
+        <span class="contadashboard mexer" onclick="quizentrar()">Quiz</span>
+        <span class="contalinha"></span>
+        <span class="contalogout mexer" onclick="limparSessao()">Fazer Logout</span>
+    </div>
+    <script>
+        function jogos() {
+            window.location.href = "../jogos.html"
+        }
+
+        function ranking() {
+            window.location.href = "ranking.html"
+        }
+        function quizentrar() {
+            window.location.href = "quiz_perguntas_gerais.html"
+        }
+    </script>
+
+    <!-- -- conteudo --  -->
+    <div id="centro">
+        <div class="conteudo">
+            <div class="graficos">
+                <div class="grafico_pizza">
+                    <canvas id="myChartp"></canvas>
+                </div>
+                <div class="grafico_barras">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+
+
+            <div class="tabela_ranking">
+                <div class="titulo_ranking">
+                    <span>Ranking Usuarios</span>
+                </div>
+
+                <div id="quizGeral">
+                    <div id="top3">
+
+                    </div>
+                    <div id="demaisColocados">
+
+                    </div>
+                    <div class="divbutao"><button onclick="fecharRanking()">Voltar</button></div>
+                </div>
+
+                <div id="botoes_de_acesso">
+                    <button class="estilo_botao" onclick="geral()"><a>Quiz Geral</a></button>
+
+                    <button class="estilo_botao" onclick="jogador()"><a>Quiz jogadores</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
+
+<script src="chart.js"></script>
+<script src="../js/funcoes.js"></script>
+<script>
+
+    nome_do_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    email_do_usuario.innerHTML = sessionStorage.EMAIL_USUARIO;
+    function geral() {
+        botoes_de_acesso.style.display = "none"
+        quizGeral.style.display = "flex"
+        atualizar_rankingGeral()
+    }
+    function fecharRanking() {
+        botoes_de_acesso.style.display = "flex"
+        quizGeral.style.display = "none"
+    }
+
+    function jogador() {
+        botoes_de_acesso.style.display = "none"
+        quizGeral.style.display = "flex"
+        atualizar_rankingJogador()
+    }
+    function fecharRanking() {
+        botoes_de_acesso.style.display = "flex"
+        quizGeral.style.display = "none"
+    }
+
+    function atualizar_rankingGeral() {
+        fetch("/usuarios/atualizar_rankingGeral", {
+            method: 'GET'
+        }).then(function (resposta) {
+
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    console.log("nenhuma resposta encontrada")
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+
+                    top3.innerHTML = "";
+                    demaisColocados.innerHTML = "";
+                    for (var i = 0; i < 3; i++) {
+                        var usuario = resposta[i];
+
+                        if (i == 0) {
+                            top3.innerHTML += `<div class="posicao">
+                    <div class="lugar"> ${i + 1}º ${usuario.nickname}  </div> 
+                    <div class="pontos">  ${usuario.pontos} </div>
+                    </div>`
+                        } else if (i == 1) {
+                            top3.innerHTML += `<div class="posicao">
+                    <div class="lugar"> ${i + 1}º ${usuario.nickname}</div> 
+                    <div class="pontos">  ${usuario.pontos}</div>
+                    </div>`
+                        } else if (i == 2) {
+                            top3.innerHTML += `<div class="posicao">
+                    <div class="lugar">${i + 1}º ${usuario.nickname}  </div> 
+                    <div class="pontos">${usuario.pontos}</div>
+                    </div>`
+                        }
+
+
+
+                    }
+
+                    for (var i = 3; i < resposta.length; i++) {
+                        var usuario = resposta[i];
+
+
+                        demaisColocados.innerHTML += `<div class="posicao">
+                    <div class="lugar"> ${i + 1}º ${usuario.nickname}  </div> 
+                    <div class="pontos">  ${usuario.pontos}</div>
+                    </div>`
+                    }
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+
+        });
+    }
+
+
+    function atualizar_rankingJogador() {
+        fetch("/usuarios/atualizar_rankingJogador", {
+            method: 'GET'
+        }).then(function (resposta) {
+
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    console.log("nenhuma resposta encontrada")
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+
+                    top3.innerHTML = "";
+                    demaisColocados.innerHTML = "";
+                    for (var i = 0; i < 3; i++) {
+                        var usuario = resposta[i];
+
+                        if (i == 0) {
+                            top3.innerHTML += `<div class="posicao">
+                    <div class="lugar"> ${i + 1}º ${usuario.nickname}  </div> 
+                    <div class="pontos">  ${usuario.pontos} </div>
+                    </div>`
+                        } else if (i == 1) {
+                            top3.innerHTML += `<div class="posicao">
+                    <div class="lugar"> ${i + 1}º ${usuario.nickname}</div> 
+                    <div class="pontos">  ${usuario.pontos}</div>
+                    </div>`
+                        } else if (i == 2) {
+                            top3.innerHTML += `<div class="posicao">
+                    <div class="lugar"> <img src="./img/bronze.svg" alt=""> ${i + 1}º ${usuario.nickname}  </div> 
+                    <div class="pontos">${usuario.pontos}</div>
+                    </div>`
+                        }
+
+
+
+                    }
+
+                    for (var i = 3; i < resposta.length; i++) {
+                        var usuario = resposta[i];
+
+
+                        demaisColocados.innerHTML += `<div class="posicao">
+                    <div class="lugar"> ${i + 1}º ${usuario.nickname}  </div> 
+                    <div class="pontos">  ${usuario.pontos}</div>
+                    </div>`
+                    }
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+
+        });
+    }
+
+
+
+    async function obterDadosGrafico() {
+        var resposta = await fetch("/usuarios/dadosGrafico");
+        resposta = await resposta.json();
+        console.log("Estes são: ", resposta);
+
+        for (var i = 0; i < resposta.length; i++) {
+            var item = resposta[i]
+            grafico.data.datasets[0].data.push(item.pontos);
+            grafico.data.labels.push(item.nome)
+        }
+        grafico.update();
+
+    }
+
+    obterDadosGrafico();
+
+    async function obterDadosGraficoJogador() {
+        var resposta = await fetch("/usuarios/dadosGraficoJogador");
+        resposta = await resposta.json();
+        console.log("Estes são: ", resposta);
+
+        for (var i = 0; i < resposta.length; i++) {
+            var item = resposta[i]
+            graficop.data.datasets[0].data.push(item.pontos);
+            graficop.data.labels.push(item.nome)
+        }
+        graficop.update();
+
+    }
+
+    obterDadosGraficoJogador();
+
+    function clickPerfil() {
+        if (subsub.style.display == 'flex') {
+            subsub.style.display = 'none'
+        } else {
+            subsub.style.display = 'flex'
+        }
+
+    }
+    function quizentrar() {
+        window.location.href = "quiz_perguntas_gerais.html"
+    }
+
+
+</script>
