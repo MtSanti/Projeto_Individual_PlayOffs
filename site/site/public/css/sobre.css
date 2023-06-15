@@ -108,9 +108,9 @@ ul, li, a{
 
 /* -- começo --  */
 .onde_comecou{
-    background-color: #ff8800c5;
+    background-color: #000000;
     width: 89.5%;
-    height: 60vh;
+    height: 70vh;
     margin-top: 10%;
     border-radius: 15px;
     padding: 4rem;
@@ -126,18 +126,21 @@ ul, li, a{
     margin-top: 10px;
     width: 20vw;
     margin-right: 133px;
+    color: #FF8A00;
 }
 
 .texto_onde_comecou{
     width: 30%;
-    height: 30%;
-    background-color: aliceblue;
+    height: 40%;
+    background-color: rgb(255, 106, 0);
     position: absolute;
     margin-top: 13%;
     padding: 2%;
     border-radius: 10px;
     /* margin-right: 500px; */
     margin-right: 30%;
+    color: white;
+    font-weight: 400;
 }
 
 #img_comeco{
@@ -154,7 +157,7 @@ ul, li, a{
 }
 
 .amor{
-    background-color: #ff8800c5;
+    background-color: #ff8800;
     width: 89.5%;
     height: 60vh;
     margin-top: 5%;
@@ -174,12 +177,13 @@ ul, li, a{
 .texto_amor{
     width: 30%;
     height: 30%;
-    background-color: aliceblue;
+    background-color: rgb(0, 0, 0);
     position: absolute;
     padding: 2%;
     border-radius: 10px;
     margin-top: 13%;
     margin-left: 25%;
+    color: white;
 }
 
 #img_eu{
@@ -194,10 +198,10 @@ ul, li, a{
 
 /* -- conquistas --  */
 .conquista{
-    background-color: #ff8800c5;
+    background-color: #000000;
     width: 89.5%;
-    height: 60vh;
-    margin-top: 5%;
+    height: 70vh;
+    margin-top: 10%;
     border-radius: 15px;
     padding: 4rem;
     display: flex;
@@ -211,21 +215,28 @@ ul, li, a{
     margin-top: 10px;
     width: 20vw;
     margin-right: 133px;
+    color: #ff8800;
 }
 
 .texto_conquista{
     width: 30%;
-    height: 30%;
-    background-color: aliceblue;
+    height: 35%;
+    background-color: #ff8800;
     position: absolute;
     margin-top: 13%;
     padding: 2%;
     border-radius: 10px;
-    /* margin-right: 500px; */
+    color: white;
     margin-right: 30%;
 }
 
-
+#img_conquista{
+    width: 30vw;
+    height: 65vh;
+    z-index: -1;
+    border-radius: 15px;
+    margin-right: 2rem;
+}
 
 
 
